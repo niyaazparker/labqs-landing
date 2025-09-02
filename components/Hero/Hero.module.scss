@@ -1,0 +1,213 @@
+@use '../../styles/variables' as *;
+
+
+.hero {
+position: relative;
+min-height: clamp(560px, 78vh, 780px);
+color: $color-text;
+overflow: clip;
+align-content: center;
+}
+/* Pill CTA that fills on hover and slides the arrow */
+.learnMore {
+  --cta-fill: #4AD7D1;                  
+  --cta-text-dark: #0f1724;            
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .55rem .9rem;
+  border-radius: 999px;
+  color: $color-text;                   /* outline state text */
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+  overflow: hidden;
+  isolation: isolate;                   /* keep ::before under content */
+  transition: border-color .25s ease, color .25s ease, transform .06s ease-in;
+
+  /* fill grows from left */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--cta-fill);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s ease;
+    z-index: 0;
+  }
+
+  /* label sits above the fill */
+  .label {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* arrow uses your SVG and inherits currentColor */
+  .arrow {
+    position: relative;
+    z-index: 1;
+    width: 30px; height: 30px;
+    background-color: currentColor;
+    -webkit-mask: url('/icons/download.svg') center / contain no-repeat;
+            mask: url('/icons/download.svg') center / contain no-repeat;
+    transform: translateX(0);
+    opacity: .95;
+    transition: transform .35s ease, opacity .35s ease, color .25s ease;
+  }
+
+  /* hover / focus-visible -> fill in, darker text, arrow slides right */
+  &:hover::before,
+  &:focus-visible::before { transform: scaleX(1); }
+
+  &:hover,
+  &:focus-visible {
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  &:hover .arrow,
+  &:focus-visible .arrow { transform: translateX(4px); }
+
+  /* active tap feedback */
+  &:active { transform: translateY(1px); }
+
+  /* keyboard focus ring */
+  &:focus-visible { outline: 2px solid $color-primary; outline-offset: 3px; }
+}
+
+/* Respect reduced motion (no sliding/fill animation) */
+@media (prefers-reduced-motion: reduce) {
+  .learnMore::before { transition: none; }
+  .learnMore .arrow { transition: none; }
+}
+
+
+.bg {
+position: absolute; inset: 0; z-index: 0;
+:global(img) { object-fit: cover; filter: saturate(1.05) brightness(.7) contrast(1.05); }
+}
+
+.motion {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0,0,0) scale(1.08); /* initial slight zoom so edges don't show */
+  transform-origin: 50% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: none; /* keep background non-interactive */
+}
+
+/* Ensure the layers inside keep covering while we transform */
+.bgVideo { object-fit: cover; width: 100%; height: 100%; }
+
+.textureImg {
+  object-fit: cover;
+  opacity: .35;
+  mix-blend-mode: multiply;
+  transform: rotate(-90deg) scale(1.18); /* your rotation/scale */
+  transform-origin: left top;
+}
+
+// overlay + subtle top vignette to match the comp
+.vignette {
+position: absolute; inset: 0; pointer-events: none;
+background:
+linear-gradient(180deg, rgba(36, 63, 105) 0%, rgba(12,20,35,.94) 100%),
+radial-gradient(70% 90% at 50% 0%, rgba(28,56,96,.25) 0%, rgba(0,0,0,0) 60%);
+mix-blend-mode: multiply;
+}
+
+
+.grid {
+position: relative; z-index: 2;
+display: grid;
+grid-template-columns: minmax(420px, 560px) minmax(380px, 550px);
+align-items: start;
+column-gap: $space-10; row-gap: $space-6;
+padding: clamp(3rem, 7vh, 5rem) 0 clamp(2rem, 6vh, 4rem);
+justify-content: center;
+}
+
+
+.title {
+max-width: 15ch; // force breaks similar to design
+font-family: var(--ff-alt), Georgia, "Times New Roman", serif;
+letter-spacing: -0.01em;
+line-height: 4.5rem;
+font-size: 3.875rem;
+margin: 0;
+color: $white;
+}
+
+
+.nbsp { white-space: nowrap; }
+
+
+.copy {
+align-self: start;
+margin-top: .35rem; 
+p {
+margin: 0 0 $space-5;
+color: $color-8;
+font-size: 1.375rem; 
+line-height: 2.25rem;
+font-weight: 300;
+letter-spacing: 0.005em;
+}
+}
+
+
+.learnMore {
+display: inline-flex; align-items: center; gap: .55rem;
+font-size: 0.875rem;
+letter-spacing: .06em; text-transform: uppercase;
+font-weight: 600; text-decoration: none; color: $color-11;
+svg { width: 28px; height: 28px; border-radius: 999px; padding: 4px;
+border: 1px solid $color-primary; stroke: $color-primary; fill: none;
+transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+&:hover svg { transform: translateX(2px); background: rgba($color-primary, .08); border-color: $color-primary-600; }
+}
+
+
+.watermark {
+letter-spacing: 0em;
+  color: rgba(255, 255, 255, .090);
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 1;
+  font-size: 20.1rem;
+  font-family: var(--ff-alt), Georgia, "Times New Roman", serif;
+  font-weight: 800;
+  line-height: 1;
+  position: absolute;
+  bottom: 169px;
+  left: -13rem;
+  transform: rotate(-90deg)  scale(1.15);
+  will-change: transform;                  /* smoother on GPU */
+  backface-visibility: hidden;   
+}
+
+
+@media (max-width: $bp-md) {
+  .grid { grid-template-columns: 1fr; padding: $space-12 $space-4 $space-10; row-gap: $space-5; }
+  .title { text-align: center; max-width: 20ch; margin-inline: auto; font-size: 2.5rem;line-height: 2.8125rem; }
+  .copy { max-width: 40ch; margin: 0 auto; text-align: center;font-size: 0.9375rem; line-height: 1.5rem; }
+  .learnMore { 
+    margin-top: $space-6; justify-content: center; gap: .5rem; 
+    font-size: .8125rem; letter-spacing: .12em;
+    svg { width: 40px; height: 40px; padding: 6px; }
+  }
+}
+
+@media (max-width: 768px) {
+  .watermark { transform: rotate(-90deg) scale(1.25); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion { transform: none !important; }
+}

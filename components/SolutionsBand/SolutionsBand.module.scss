@@ -1,0 +1,146 @@
+@use '../../styles/variables' as *;
+
+.wrap {
+  --split: 56%;
+  position: relative;
+  color: #fff;
+  //overflow: clip;
+  min-height: 1070px;
+  padding: max(12rem, min(7vh, 5rem)) 25rem 3rem 37rem;
+}
+
+.bg { position: absolute; inset: 0; z-index: 0; }
+.video { width: 100%;  object-fit: cover; }
+
+/* Left/right color blocks controlled by --split (px or %) */
+.leftTone,
+.rightTone,
+.overlayLeft,
+.seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.leftTone {
+  --alpha: .9;
+  --left-dark: 46, 79, 128;   
+  --left-light: 107, 141, 195;
+  --dark-ratio: 35%;          
+
+  position: absolute;
+  inset: 0;
+  right: calc(100% - var(--split)); 
+  z-index: 2;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(var(--left-dark),  var(--alpha)) 0 var(--dark-ratio),
+    rgba(var(--left-light), var(--alpha)) var(--dark-ratio) 100%
+  );
+  filter: saturate(1.2) brightness(.8) contrast(1.2);
+}
+
+
+
+
+.rightTone {
+  left: var(--split);
+  right: 0;
+  z-index: 2;
+  background: $color-6;
+}
+
+.overlayLeft {
+  left: 0;
+  right: calc(100% - var(--split));
+  z-index: 3;
+  mix-blend-mode: multiply;
+}
+
+/* The 1px seam */
+.seam {
+  left: var(--split);
+  width: 1px;
+  z-index: 4;
+  background: rgba(255,255,255,.08);
+}
+
+/* Content */
+.grid {
+  position: relative; z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(320px, 1.25fr) minmax(420px, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: start;
+}
+.explorecontainer {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 330px;
+  flex-direction: column;
+  .explorebtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.kicker {
+  margin: 0 0 .5rem;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 1rem;
+  color: $white;
+  text-align: right;
+}
+
+.title {
+  margin: 0 0 1.25rem;
+  font-family: var(--ff-alt), Georgia, "Times New Roman", serif;
+  letter-spacing: -.01em;
+  line-height: 3.625rem;
+  font-size: 3rem;
+  text-align: right;
+}
+
+/* pill CTA like your other buttons */
+.cta {
+  --fill: #4AD7D1; --text-filled: #ffffff;
+  position: relative; display: inline-flex; align-items: center; gap: .55rem;
+  padding: .6rem 1rem; border-radius: 999px;
+  color: var(--fill); text-decoration: none; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .12em; font-size: 1rem; isolation: isolate; overflow: hidden;
+  transition: color .25s ease, border-color .25s ease;
+
+  &::before {
+    content: ""; position: absolute; inset: 0; background: var(--fill);
+    transform: scaleX(0); transform-origin: left; transition: transform .35s ease; z-index: 0;
+  }
+
+}
+
+.ctaLabel { position: relative; z-index: 1; }
+
+.ctaArrow {
+  position: relative; z-index: 1; width: 30px; height: 30px; background-color: currentColor;
+  -webkit-mask: url('/icons/next-arrow.svg') center/contain no-repeat;
+          mask: url('/icons/next-arrow.svg') center/contain no-repeat;
+  transition: transform .35s ease;
+}
+
+.cta:hover::before,
+.cta:focus-visible::before { transform: scaleX(1); }
+.cta:hover, .cta:focus-visible { color: var(--text-filled); border-color: transparent; }
+.cta:hover .ctaArrow, .cta:focus-visible .ctaArrow { transform: translateX(4px); }
+.cta:focus-visible { outline: 2px solid #4AD7D1; outline-offset: 3px; }
+
+.right p { 
+  margin: 0 0 1rem; opacity: .92; line-height: 2rem;font-size: 1.25rem;font-weight: 300; 
+  strong {font-weight: 600;}
+}
+
+@media (max-width: $bp-md) {
+  .grid { grid-template-columns: 1fr; }
+  .right { font-size: .95rem; }
+}

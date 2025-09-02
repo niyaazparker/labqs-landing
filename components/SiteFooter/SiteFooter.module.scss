@@ -1,0 +1,61 @@
+@use '../../styles/variables' as *;
+
+$deep: #16355d;
+$deep2: #0c274a;
+
+.wrap {
+  position: relative;
+  color: #cfe2ff;
+  padding: clamp(2rem, 5vw, 3rem) 0 clamp(1.2rem, 3.5vw, 2rem);
+  overflow: clip;
+}
+
+.bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(12,39,74,1), rgba(12,39,74,.96));
+}
+
+.medallion {
+  --ring: rgba(111, 195, 230, .9);
+  width: 54px; height: 54px; margin: 0 auto clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: 50%;
+  border: 2px solid var(--ring);
+  position: relative; z-index: 1;
+  &::after {
+    content: ""; position: absolute; inset: 7px;
+    border: 1px dashed var(--ring); border-radius: 50%;
+    opacity: .9;
+  }
+}
+
+.row {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.copy {
+  color: rgba(214,232,255,.9);
+}
+
+.disclaimer {
+  display: inline-flex; align-items: center; gap: .5rem;
+  color: #cfe2ff; text-decoration: none; font-weight: 600;
+  letter-spacing: .06em;
+  .dot {
+    width: 18px; height: 18px; border: 2px solid currentColor; border-radius: 999px;
+    display: inline-block;
+  }
+  &:hover { opacity: .9; }
+}
+
+@media (max-width: $bp-md) {
+  .row {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: .5rem;
+  }
+}

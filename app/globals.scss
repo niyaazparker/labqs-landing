@@ -1,0 +1,18 @@
+/* app/globals.scss */
+@use '../styles/variables' as *;
+
+/* No variable assignments here – let next/font set them */
+:root {}
+
+/* Use the variables with good fallbacks */
+body {
+  margin: 0;
+  color: $color-text;
+  background: #fff;
+  font-family: var(--ff-sans), system-ui, -apple-system, "Segoe UI", Roboto,
+               Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.serif, .title, h1, h2, .uses-alt-font {
+  font-family: var(--ff-alt), Georgia, "Times New Roman", serif;
+}

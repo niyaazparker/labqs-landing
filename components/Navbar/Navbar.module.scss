@@ -1,0 +1,148 @@
+@use '../../styles/variables' as *;
+
+.wrap {
+  --container-pad: clamp(1rem, 8vw, 8.125rem);
+  --menu-offset: 0px;
+
+  position: sticky; top: 0; inset-inline: 0; z-index: 60;
+  transform: none;                      
+  transition: transform .28s ease, background .2s ease, border-color .2s ease, backdrop-filter .2s ease;
+  background: rgba(27, 51, 88, .90);
+  backdrop-filter: saturate(1.2) blur(8px);
+  border-bottom: 1px solid transparent;
+}
+.revealed { transform: none; }            
+.hidden   { transform: translateY(-100%); }
+.scrolled { border-bottom-color: $color-border; }
+.megaOpen { background: rgba(27, 51, 88, .80); backdrop-filter: none; }
+
+.nav {
+  display: flex; align-items: center; gap: $space-6;
+  height: 68px; padding-inline: var(--container-pad);
+  border-bottom: 1px solid $color-6;
+}
+.brand { display: inline-flex; align-items: center; }
+.spacer { flex: 1; }
+
+.links {
+  --underline-inset: .25rem;
+  display: flex; align-items: center; gap: $space-8;
+  margin: 0; padding: 0; list-style: none;
+
+  a, .toplink {
+    position: relative; display: inline-flex; align-items: center; gap: .45rem;
+    color: $color-text; text-decoration: none; font-weight: 400;
+    line-height: 1; padding-block: 1.05rem; padding-inline: .35rem;font-size: 0.75rem;
+    transition: color .18s ease;
+  }
+
+  /* underline */
+  a::before, .toplink::before {
+    content: ''; position: absolute; left: var(--underline-inset); right: var(--underline-inset);
+    bottom: -0.7rem; height: 1px; background: $color-primary;
+    transform: scaleX(0); transform-origin: left; transition: transform .18s ease;
+  }
+
+  /* HOVER COLOR + underline */
+  a:hover, a:focus-visible,
+  .toplink:hover, .toplink:focus-visible {
+    color: $color-primary; /* #4AD7D1 */
+  }
+  a:hover::before, a:focus-visible::before,
+  .toplink:hover::before, .toplink:focus-visible::before { transform: scaleX(1); }
+}
+
+
+.toplink {
+  background: none; border: 0; cursor: pointer; font: inherit;
+  letter-spacing: .06em;
+
+  .toptext { line-height: 1; }
+
+  .chev {
+    width: 12px; height: 12px; flex: 0 0 12px;
+    background-color: currentColor; /* inherits from link color */
+    -webkit-mask: url('/icons/chevron.svg') center / contain no-repeat;
+            mask: url('/icons/chevron.svg') center / contain no-repeat;
+    transform: rotate(0deg);
+    transition: transform .18s ease, background-color .18s ease;
+  }
+
+  /* rotate chevron when menu is open (uses your aria-expanded) */
+  &[aria-expanded="true"] .chev { transform: rotate(180deg); }
+}
+
+/* desktop dropdown */
+.dropdown {
+  position: absolute; left: 0; right: 0; top: 68px;
+  transform: translateY(-8px); opacity: 0; visibility: hidden; pointer-events: none;
+  transition: transform .22s ease, opacity .22s ease, visibility .22s ease; z-index: 59;
+}
+.open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+.dropdownInner { background: rgba(27, 51, 88, .80);  border-bottom: 1px solid $color-6; box-shadow: 0 24px 60px rgba(0,0,0,.35); padding-block: $space-8; }
+.menuGrid { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: $space-12; padding-left: calc(var(--container-pad) + var(--menu-offset)); padding-right: var(--container-pad);
+  ul { margin: 0; padding: 0; list-style: none; }
+  li + li { margin-top: $space-4; }
+  a { color: $color-text; text-decoration: none; opacity: .9; transition: opacity .15s ease, transform .15s ease; &:hover { opacity: 1; transform: translateX(2px); } }
+}
+
+/* ───────────  MOBILE BUTTONS (SVG icons) ─────────── */
+
+/* top-right hamburger/close */
+.mobileToggle {
+  display: none;                          /* shown at <= $bp-md */
+  width: 30px; height: 30px; border-radius: 0;
+  border: none; background: transparent; color: $color-text;
+  place-items: center; padding: 0; cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  /* size the Next <Image> element */
+  img, :global(img) { width: 30px; height: 30px; display: block; }
+  &:hover { background: rgba($color-primary, .08); }
+  &:focus-visible { outline: 2px solid $color-primary; outline-offset: 2px; }
+}
+
+/* mobile full-screen menu */
+.mobileMenu {
+  position: fixed; inset: 0; z-index: 1000;     /* above everything */
+  background: rgba(27,51,88,.96);
+  transform: translateY(-100%); opacity: 0; visibility: hidden;
+  transition: transform .28s ease, opacity .28s ease, visibility .28s ease;
+  height: 100dvh;                               /* modern mobile viewport */
+  overflow: auto;                               /* scroll if list is tall */
+  pointer-events: none;                         /* no accidental clicks when closed */
+}
+.mobileMenu.open {
+  transform: translateY(0); opacity: 1; visibility: visible;
+  pointer-events: auto;                         /* clickable when open */
+}
+
+/* top-right close inside overlay */
+.mobileClose {
+  z-index: 1001; position: fixed; top: 16px; right: 16px; 
+  width: 30px; height: 30px; border-radius: 0;
+  border: none; background: transparent; color: $color-text;
+  display: grid; place-items: center; cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  img, :global(img) { width: 30px; height: 30px; display: block; }
+  &:hover { background: rgba($color-primary, .08); }
+  &:focus-visible { outline: 2px solid $color-primary; outline-offset: 2px; }
+}
+
+.mobileWatermark {
+  position: absolute; left: -6vw; bottom: -6vh; font-weight: 800; letter-spacing: -.06em; line-height: 1;
+  font-size: clamp(8rem, 38vw, 24rem); color: rgba(255,255,255,.04); pointer-events: none; user-select: none;
+}
+
+.mobileList {
+  position: absolute; inset: 0; display: grid; place-content: center; gap: $space-6; padding: $space-8;
+  list-style: none; margin: 0; text-align: center;
+  a { text-decoration: none; color: $color-text; letter-spacing: .18em; font-weight: 600; }
+}
+.investor { color: $color-primary; }
+
+@media (max-width: $bp-md) {
+  .links { display: none; }
+  .mobileToggle { display: inline-grid; }
+  .nav { padding-inline: $space-4; }
+  .dropdown { display: none; } /* disable desktop mega on mobile */
+}

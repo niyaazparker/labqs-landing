@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+
+/* Base overlay (start transparent; classes below drive the fade) */
+.overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid;
+  grid-template-rows: auto auto;         
+  justify-items: center;
+  align-content: center;                  
+  gap: $space-4;
+
+  /* Start transparent; classes below animate these */
+  opacity: 0;
+  background-color: rgba(17, 33, 58, 0);
+  transition:
+    opacity .60s ease,
+    background-color .32s ease;
+  color: $color-text;
+}
+
+/* Fade-in target state */
+.enter {
+  opacity: 1;
+  background-color: rgba(17, 33, 58, .86); 
+}
+
+/* Fade-out target state (back to transparent) */
+.leave {
+  opacity: 0;
+  background-color: rgba(17, 33, 58, 0);
+}
+
+/* Use the provided SVG; rotate it smoothly */
+.spinner {
+  width: 64px; height: 64px;
+  background: url('/icons/loading.svg') center / contain no-repeat;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+/* Label style */
+.label {
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: $color-muted;
+}
+
+/* Rotation keyframes */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .overlay { transition: none; }
+  .spinner { animation: none; }
+}

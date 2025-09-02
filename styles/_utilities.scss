@@ -1,0 +1,15 @@
+.btn {
+--bg: #{$color-primary};
+--bg-hover: #{$color-primary-600};
+--fg: #0b0c0f;
+display: inline-flex; align-items: center; gap: .5rem;
+padding: .75rem 1rem; border-radius: $radius-md; border: 1px solid transparent;
+background: var(--bg); color: var(--fg); text-decoration: none; font-weight: 600;
+transition: transform .12s ease, background .12s ease, box-shadow .2s ease;
+&:hover { background: var(--bg-hover); transform: translateY(-1px); }
+&:focus-visible { @include focus-ring; }
+}
+
+
+.section { padding: $space-16 0; }
+.card { background: $color-surface; border: 1px solid $color-border; border-radius: $radius-lg; box-shadow: $shadow-soft; }

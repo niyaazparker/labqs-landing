@@ -1,0 +1,59 @@
+// Colors 
+$color-1:#11213a; //dark midnight blue
+$color-2:#1b3358; // Ocean Blue
+$color-3:#243f69; // Midnight blue
+$color-4:#2f558e; // True Blue
+$color-5:#5c91f7; // Cobalt
+$color-6:#6b8dc3; // Sky Blue
+$color-7:#8eb3f1; // Parakeet Blue
+$color-8:#bfd7ff; // Bright Parakeet Blue
+$color-9:#dee2ec; // Bright Blue Overlay
+$color-10:#efefef; // Grey
+$color-11:#44c3ba; // Aqua
+$color-12:#77f4ea; //Aqua Bright
+$white: #ffffff;
+
+$color-bg: #11213a;
+$color-surface: #111723;
+$color-text: #bfd7ff;
+$color-muted: #A7B0C0;
+$color-primary: #4AD7D1;
+$color-primary-600: #2FB8B1;
+$color-border: #232B36;
+$color-accent: #ffd166; // accent
+$color-danger: #ff6b6b;
+$color-success: #2dd4bf;
+
+
+// Spacing scale (4‑pt)
+$space-0: 0;
+$space-1: .25rem; // 4px
+$space-2: .5rem; // 8px
+$space-3: .75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.25rem;// 20px
+$space-6: 1.5rem; // 24px
+$space-8: 2rem; // 32px
+$space-10: 2.5rem;// 40px
+$space-12: 3rem; // 48px
+$space-16: 4rem; // 64px
+
+
+// Radii
+$radius-sm: .375rem;
+$radius-md: .75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+
+
+// Shadows
+$shadow-soft: 0 10px 30px rgba(0,0,0,.25);
+
+
+// Breakpoints
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+// Fonts
+$--f-alt: var(--ff-alt), Georgia, "Times New Roman", serif;
