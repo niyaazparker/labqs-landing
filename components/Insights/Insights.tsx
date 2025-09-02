@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import styles from './Insights.module.scss';
 
 type Kind = 'article' | 'podcast';
