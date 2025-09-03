@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: { ignoreDuringBuilds: true },
+images: {
+// allow remote images if you’ll pull from a CDN later
+remotePatterns: [
+// { protocol: 'https', hostname: 'images.example.com' }
+],
+},
 };
-module.exports = nextConfig;
+export default nextConfig;

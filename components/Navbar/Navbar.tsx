@@ -7,10 +7,10 @@ import styles from './Navbar.module.scss';
 type MenuKey = 'about' | 'solutions' | null;
 
 export default function Navbar() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLElement>(null);
-  const aboutRef = useRef<HTMLLIElement>(null);
-  const solutionsRef = useRef<HTMLLIElement>(null);
+const navRef = useRef<HTMLElement | null>(null);
+const wrapRef = useRef<HTMLDivElement | null>(null);
+const aboutRef = useRef<HTMLLIElement | null>(null);
+const solutionsRef = useRef<HTMLLIElement | null>(null);
 
   const lastY = useRef(0);
   const [revealed, setRevealed] = useState(true);
@@ -96,7 +96,7 @@ export default function Navbar() {
         aria-label="Primary"
         onMouseLeave={scheduleClose}
         onMouseEnter={cancelClose}
-        ref={navRef as any}
+        ref={navRef}
       >
         <Link href="#" className={styles.brand} aria-label="LABQS home">
           <Image src="/images/logo.svg" alt="" width={187} height={36} priority />
