@@ -1,61 +1,142 @@
 @use '../../styles/variables' as *;
 
-$deep: #16355d;
-$deep2: #0c274a;
+/* Colors tuned to match the comp */
+$footer-bg: #2b5287;         /* mid blue like the design */
+$text: rgba(214,232,255,.95);
+$accent: #76efe9;            /* aqua used elsewhere for CTAs */
+$accent-dark: #4AD7D1;
 
 .wrap {
   position: relative;
-  color: #cfe2ff;
-  padding: clamp(2rem, 5vw, 3rem) 0 clamp(1.2rem, 3.5vw, 2rem);
+  color: $text;
+  padding: clamp(2.25rem, 4.2vw, 3rem) 0;
   overflow: clip;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
+/* Flat mid-blue bar; keep this element to mirror your structure */
 .bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    linear-gradient(180deg, rgba(12,39,74,1), rgba(12,39,74,.96));
-}
-
-.medallion {
-  --ring: rgba(111, 195, 230, .9);
-  width: 54px; height: 54px; margin: 0 auto clamp(1rem, 2.5vw, 1.5rem);
-  border-radius: 50%;
-  border: 2px solid var(--ring);
-  position: relative; z-index: 1;
-  &::after {
-    content: ""; position: absolute; inset: 7px;
-    border: 1px dashed var(--ring); border-radius: 50%;
-    opacity: .9;
-  }
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: $footer-bg;
 }
 
 .row {
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
+
   display: grid;
-  grid-template-columns: 1fr auto;
+  /* Desktop: left / center / right */
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "copy logo link";
   align-items: center;
-  gap: 1rem;
+  column-gap: clamp(1rem, 3vw, 2rem);
 }
 
+/* Left */
 .copy {
-  color: rgba(214,232,255,.9);
+  grid-area: copy;
+  justify-self: start;
+  font-size: .9375rem;
+  line-height: 1.4;
+  opacity: .95;
 }
 
-.disclaimer {
-  display: inline-flex; align-items: center; gap: .5rem;
-  color: #cfe2ff; text-decoration: none; font-weight: 600;
-  letter-spacing: .06em;
-  .dot {
-    width: 18px; height: 18px; border: 2px solid currentColor; border-radius: 999px;
-    display: inline-block;
+/* Center */
+.logo {
+  grid-area: logo;
+  justify-self: center;
+
+  img {
+    display: block;
+    width: clamp(63px, 4.2vw, 64px);
+    height: auto;
   }
-  &:hover { opacity: .9; }
 }
 
+/* Right (Disclaimers CTA) */
+.cta {
+  grid-area: link;
+  justify-self: end;
+
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  text-decoration: none;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1;
+
+  /* subtle hover/focus polish */
+  transition: opacity .2s ease, transform .2s ease;
+
+  &:hover { opacity: .95; }
+  &:focus-visible {
+    outline: 2px solid $accent-dark;
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+}
+
+.ctaLabel { white-space: nowrap; }
+
+/* circular arrow */
+.ctaIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: none;
+  position: relative;
+  flex: 0 0 30px;
+  transition: transform .2s ease, border-color .2s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    background: $accent;
+    -webkit-mask: url('/icons/next-arrow.svg') center/contain no-repeat;
+            mask: url('/icons/next-arrow.svg') center/contain no-repeat;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  /* nudge on hover for a bit of life */
+  .cta:hover & { transform: translateX(2px); }
+}
+
+/* --------- Mobile --------- */
 @media (max-width: $bp-md) {
   .row {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "copy"
+      "link";
+    row-gap: clamp(3rem, 6vw, 1.25rem);
     text-align: center;
-    gap: .5rem;
+  }
+
+  .copy { justify-self: center; font-size: .9375rem; }
+
+  .cta {
+    justify-self: center;
+    font-size: .95rem;
+    gap: .7rem;
+  }
+
+  .ctaIcon {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+
+    &::after { width: 30px; height: 30px; }
   }
 }

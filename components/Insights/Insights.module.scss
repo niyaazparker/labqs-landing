@@ -5,7 +5,6 @@
   padding: 0;
   max-width: 1440px;
   margin: 0 auto;
-  bottom: 400px;
 }
 
 /* dark panel that overlaps into hero a bit if desired */
@@ -44,7 +43,7 @@
   justify-content: center;
 }
 .kicker { margin: 0 0 .5rem; text-transform: uppercase; letter-spacing: .22em; font-size: 1rem; color: $color-7; }
-.title { margin: 0; font-family: var(--ff-alt), Georgia, "Times New Roman", serif;; font-size: 3rem;color: #fff;line-height: 3.625rem; }
+.title { margin: 0; font-family: var(--ff-alt), Georgia, "Times New Roman", serif;; font-size: 3rem;color: #fff;line-height: 3.625rem; text-align: center; }
 
 /* view-all pill (same hover interaction) */
 .viewAll {

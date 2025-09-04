@@ -8,17 +8,21 @@ export default function SiteFooter() {
       <div className={styles.bg} aria-hidden />
 
       <div className="container">
-        {/* center medallion */}
-        <div className={styles.medallion} aria-hidden />
-
         <div className={styles.row}>
+          {/* Left: copyright */}
           <small className={styles.copy}>
-            © LAB Quantitative Strategies — All rights reserved
+            © LAB Quantitative Strategies – All rights reserved
           </small>
 
-          <a className={styles.disclaimer} href="/disclaimers">
-            <span>Disclaimers</span>
-            <i className={styles.dot} aria-hidden />
+          {/* Center: medallion/logo */}
+          <div className={styles.logo} aria-hidden>
+            <img src="/icons/footerlogo.svg" alt="" />
+          </div>
+
+          {/* Right: disclaimers CTA */}
+          <a className={styles.cta} href="/disclaimers">
+            <span className={styles.ctaLabel}>Disclaimers</span>
+            <span className={styles.ctaIcon} aria-hidden />
           </a>
         </div>
       </div>

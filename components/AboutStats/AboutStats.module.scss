@@ -6,13 +6,13 @@
 .grid {
   display: grid;
   grid-template-columns: minmax(420px, 1.05fr) minmax(420px, .95fr);
-  gap: 0;                          /* the seam is shared */
+  gap: 0;                          
   align-items: stretch;
 }
 /* ----- Left (white card) ----- */
 .left {
   position: relative;
-  z-index: 1;                      /* below the panel/markers so they can overlap */
+  z-index: 1;                      
   background: rgba(255,255,255,.98);
   color: #0f1724;
   border-radius: 0;
@@ -158,8 +158,8 @@ $connector-h: 50px;
   &::before {
     content: '';
     position: absolute;
-    left: -60px;                   /* push over the seam into the white card */
-    top: 2.2rem;                  /* aligns with headline baseline */
+    left: -60px;                 
+    top: 2.2rem;                
     width: $connector-w;
     height: $connector-h;
     background: url('/icons/bullets.svg') left center / contain no-repeat;
@@ -173,7 +173,7 @@ $connector-h: 50px;
   .grid { grid-template-columns: 1fr; gap: 1.75rem;background: rgba(255, 255, 255, .98); }
 
   .left { 
-    padding: 8.25rem 3.75rem;
+    padding: 6.25rem 3.75rem;
     text-align: center;
     box-shadow: none;
     background: none;
@@ -187,13 +187,13 @@ $connector-h: 50px;
     }
    }
 
-  .right { --lift: 0px;padding: 0 2.5rem;box-shadow: none; }          /* no overlap on mobile */
+  .right { --lift: 0px;padding: 0 2.1875rem;box-shadow: none; }         
   .stat {
   /* connector (dot + line) from the provided svg */
   &::before {
     content: '';
-    left: -60px;                   /* push over the seam into the white card */
-    top: 1.2rem;                  /* aligns with headline baseline */
+    left: -60px;             
+    top: 1.2rem;                  
     width: $connector-w;
     height: $connector-h;
     background: none;

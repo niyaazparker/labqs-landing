@@ -5,23 +5,25 @@ import styles from './SolutionsBand.module.scss';
 export default function SolutionsBand() {
   const rootRef = useRef<HTMLElement>(null);
 
-  // Auto-sync our split with the band above
+  // Sync our left/right seam with the anchor above
   useEffect(() => {
     const setSplitFromAnchor = () => {
       const root = rootRef.current;
       if (!root) return;
 
-      // Find the seam anchor in the section above
-      const anchor = document.querySelector('[data-seam-anchor]') as HTMLElement | null;
+      // mobile? force 100%
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        root.style.setProperty('--split', '100%');
+        return;
+      }
 
+      const anchor = document.querySelector('[data-seam-anchor]') as HTMLElement | null;
       if (anchor) {
-        // Convert anchor's left edge to a page X (px), then set as our --split
         const rect = anchor.getBoundingClientRect();
-        const pageX = rect.left + window.scrollX; // px from page left
+        const pageX = rect.left + window.scrollX;
         root.style.setProperty('--split', `${Math.round(pageX)}px`);
       } else {
-        // Fallback (tweak if you like)
-        root.style.setProperty('--split', '52.52%');
+        root.style.setProperty('--split', '52.5%'); // fallback
       }
     };
 
@@ -36,8 +38,8 @@ export default function SolutionsBand() {
 
   return (
     <section ref={rootRef} id="solutions" className={styles.wrap} aria-labelledby="solutions-title">
-      {/* Background layer */}
-      <div className={styles.bg}>
+      {/* Background + tones (desktop left/right; mobile becomes top band) */}
+      <div className={styles.bg} aria-hidden>
         <video
           className={styles.video}
           autoPlay
@@ -46,7 +48,6 @@ export default function SolutionsBand() {
           playsInline
           preload="auto"
           poster="/images/hero-desktop.png"
-          aria-hidden
           disablePictureInPicture
           controls={false}
           controlsList="nodownload noplaybackrate noremoteplayback"
@@ -55,34 +56,35 @@ export default function SolutionsBand() {
           <source src="/assets/labqs-landing-vid2.mp4" type="video/mp4" />
         </video>
 
-        {/* Left/right tones + seam (all driven by --split) */}
-        <i className={styles.leftTone} aria-hidden />
-        <i className={styles.rightTone} aria-hidden />
-        <i className={styles.overlayLeft} aria-hidden /> {/* subtle vignette on left only */}
-        <i className={styles.seam} aria-hidden />
+        <i className={styles.leftTone} />
+        <i className={styles.rightTone} />
+        <i className={styles.overlayLeft} />
+        <i className={styles.seam} />
       </div>
 
       <div className="container">
         <div className={styles.grid}>
+          {/* Left panel */}
           <div className={styles.left}>
-            <div className={styles.explorecontainer}>
-            <p className={styles.kicker}>Solutions</p>
-            <h2 id="solutions-title" className={styles.title}>
-              Manage risk.<br />Stay invested.
-            </h2>
-            <div className={styles.explorebtn}>
+            <div className={styles.leftInner}>
+              <p className={styles.kicker}>Solutions</p>
+              <h2 id="solutions-title" className={styles.title}>
+                Manage risk.<br />Stay invested.
+              </h2>
+
               <a href="#media" className={styles.cta} aria-label="Explore our solutions">
                 <span className={styles.ctaLabel}>Explore our solutions</span>
                 <span className={styles.ctaArrow} aria-hidden />
               </a>
             </div>
-            </div>
           </div>
 
+          {/* Right copy */}
           <div className={styles.right}>
-            <p><strong>
-              Separating alpha and beta exposures offers enhanced returns, diversification, and
-              flexibility while maintaining core allocations and controlling market risk.
+            <p>
+              <strong>
+                Separating alpha and beta exposures offers enhanced returns, diversification, and
+                flexibility while maintaining core allocations and controlling market risk.
               </strong>
             </p>
             <p>
