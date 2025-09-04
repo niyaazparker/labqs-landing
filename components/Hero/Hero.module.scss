@@ -3,7 +3,7 @@
 
 .hero {
 position: relative;
-min-height: clamp(560px, 78vh, 780px);
+min-height: clamp(600px, 78vh, 780px);
 color: $color-text;
 overflow: clip;
 align-content: center;
@@ -25,7 +25,7 @@ align-content: center;
   text-transform: uppercase;
   line-height: 1;
   overflow: hidden;
-  isolation: isolate;                   /* keep ::before under content */
+  isolation: isolate;             
   transition: border-color .25s ease, color .25s ease, transform .06s ease-in;
 
   /* fill grows from left */
@@ -206,7 +206,12 @@ letter-spacing: 0em;
 }
 
 @media (max-width: 768px) {
-  .watermark { transform: rotate(-90deg) scale(1.25); }
+  .watermark { 
+    transform: rotate(-90deg) scale(1.25); 
+    font-size: 7rem;
+  left: -4rem;
+  bottom: 408px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .motion { transform: none !important; }

@@ -52,7 +52,6 @@ export default function SolutionsBand() {
           controls={false}
           controlsList="nodownload noplaybackrate noremoteplayback"
         >
-          <source src="/assets/labqs-landing-vid2.webm" type="video/webm" />
           <source src="/assets/labqs-landing-vid2.mp4" type="video/mp4" />
         </video>
 

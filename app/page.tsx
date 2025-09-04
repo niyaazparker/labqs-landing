@@ -17,7 +17,9 @@ export default function Page() {
       <main>
         <AboutStats />
         <SolutionsBand />
-        <Insights />
+        <div className="insightsOverlap">
+          <Insights />
+        </div>
         <ContactBand />
         <SiteFooter />
       </main>

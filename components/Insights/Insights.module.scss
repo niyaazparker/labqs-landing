@@ -17,7 +17,6 @@
   background-size: 200px auto;
   color: $color-text;
   border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 24px 60px rgba(0,0,0,.35);
   border-radius: 0;
   overflow: hidden;
   padding:0;
@@ -72,7 +71,7 @@
 .track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc(100% / 3);    /* desktop 3-up */
+  grid-auto-columns: calc(100% / 3);   
   transition: transform .35s ease;
 }
 

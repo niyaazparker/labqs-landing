@@ -14,7 +14,7 @@ export default function ContactBand() {
           loop
           playsInline
           preload="auto"
-          poster="/images/contact-bg-fallback.jpg"
+          poster="/images/contact-bg-fallback.PNG"
           disablePictureInPicture
           controls={false}
           controlsList="nodownload noplaybackrate noremoteplayback"

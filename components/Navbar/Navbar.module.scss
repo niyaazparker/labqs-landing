@@ -61,7 +61,7 @@
 
   .chev {
     width: 12px; height: 12px; flex: 0 0 12px;
-    background-color: currentColor; /* inherits from link color */
+    background-color: currentColor; 
     -webkit-mask: url('/icons/chevron.svg') center / contain no-repeat;
             mask: url('/icons/chevron.svg') center / contain no-repeat;
     transform: rotate(0deg);
@@ -103,17 +103,17 @@
 
 /* mobile full-screen menu */
 .mobileMenu {
-  position: fixed; inset: 0; z-index: 1000;     /* above everything */
-  background: rgba(27,51,88,.96);
+  position: fixed; inset: 0; z-index: 1000;    
+  background: rgba(27,51,88,1);
   transform: translateY(-100%); opacity: 0; visibility: hidden;
   transition: transform .28s ease, opacity .28s ease, visibility .28s ease;
-  height: 100dvh;                               /* modern mobile viewport */
-  overflow: auto;                               /* scroll if list is tall */
-  pointer-events: none;                         /* no accidental clicks when closed */
+  height: 100dvh;                              
+  overflow: auto;                              
+  pointer-events: none;                        
 }
 .mobileMenu.open {
   transform: translateY(0); opacity: 1; visibility: visible;
-  pointer-events: auto;                         /* clickable when open */
+  pointer-events: auto;                        
 }
 
 /* top-right close inside overlay */
@@ -129,14 +129,22 @@
 }
 
 .mobileWatermark {
-  position: absolute; left: -6vw; bottom: -6vh; font-weight: 800; letter-spacing: -.06em; line-height: 1;
-  font-size: clamp(8rem, 38vw, 24rem); color: rgba(255,255,255,.04); pointer-events: none; user-select: none;
+  position: absolute; 
+  left: -6vw; 
+  bottom: 14.2vh;
+  font-family: var(--ff-alt), Georgia, "Times New Roman", serif;
+  left: -25vw;
+  transform: rotate(-90deg)scale(1.25);
+  font-weight: 800; 
+  letter-spacing: -.06em; 
+  line-height: 1;
+  font-size: clamp(12rem, 38vw, 24rem); color: rgba(255,255,255,.04); pointer-events: none; user-select: none;
 }
 
 .mobileList {
-  position: absolute; inset: 0; display: grid; place-content: center; gap: $space-6; padding: $space-8;
+  position: absolute; inset: 0; display: grid; place-content: center; gap: 3rem; padding: $space-8;
   list-style: none; margin: 0; text-align: center;
-  a { text-decoration: none; color: $color-text; letter-spacing: .18em; font-weight: 600; }
+  a { text-decoration: none; color: $color-text; letter-spacing: .18em; font-weight: 400; font-size: 0.875rem; }
 }
 .investor { color: $color-primary; }
 

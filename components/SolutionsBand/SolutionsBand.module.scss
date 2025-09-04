@@ -11,8 +11,11 @@
 
   position: relative;
   color: #fff;
-  min-height: clamp(680px, 88vh, 980px);
-  padding: clamp(6rem, 10vh, 8rem) 0 clamp(2.5rem, 6vh, 4rem);
+  min-height: clamp(680px, 150vh, 1280px);
+  overflow: visible;
+  padding: clamp(10rem, 10vh, 8rem) 0 clamp(2.5rem, 6vh, 4rem);
+
+  padding-bottom: clamp(10rem, 22vh, 14rem);
 }
 
 .bg { position: absolute; inset: 0; z-index: 0; }

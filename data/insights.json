@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "kind": "article",
+      "title": "LAB QS nears portable alpha fund debut",
+      "excerpt": "The $1.8bn+ file to launch is next in the coming months.",
+      "date": "Jan 2025",
+      "cta": "Read here",
+      "href": "/media/portable-alpha-debut"
+    },
+    {
+      "kind": "podcast",
+      "title": "Rainmaker Podcast",
+      "excerpt": "Fundraising with precision; optimizing sales at LAB QS with Shane McCarthy.",
+      "date": "May 2025",
+      "cta": "Listen",
+      "href": "/media/rainmaker-podcast"
+    },
+    {
+      "kind": "podcast",
+      "title": "Top Traders Unplugged",
+      "excerpt": "The Simplicity of Trend Following with Katy Kaminski, Alan Dunne, R Gevrosman & Roberto Osorio - L 01 & 02",
+      "date": "October 2024",
+      "cta": "Listen",
+      "href": "/media/top-traders-unplugged"
+    },
+    {
+      "kind": "article",
+      "title": "LAB QS nears portable alpha fund debut",
+      "excerpt": "The $1.8bn+ file to launch is next in the coming months.",
+      "date": "Jan 2025",
+      "cta": "Read here",
+      "href": "/media/portable-alpha-debut"
+    },
+    {
+      "kind": "podcast",
+      "title": "Rainmaker Podcast",
+      "excerpt": "Fundraising with precision; optimizing sales at LAB QS with Shane McCarthy.",
+      "date": "May 2025",
+      "cta": "Listen",
+      "href": "/media/rainmaker-podcast"
+    }
+  ]
+}
+

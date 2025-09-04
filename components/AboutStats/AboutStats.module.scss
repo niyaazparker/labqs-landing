@@ -40,12 +40,10 @@ p.kicker {
 }
 
 
-/* Small CTA */
-/* Pill CTA like Learn More, adapted for light card */
 .storyLink {
-  --cta-fill: #1F6F7F;        /* cyan fill */
-  --text-default: #1F6F7F;    /* link blue on white card */
-  --text-filled: #ffffff;     /* text when filled */
+  --cta-fill: #1F6F7F;      
+  --text-default: #1F6F7F;   
+  --text-filled: #ffffff;    
 
   position: relative;
   display: inline-flex; align-items: center; gap: .55rem;
@@ -111,8 +109,8 @@ p.kicker {
 /* ----- Right (blue panel) ----- */
 .right {
   position: relative;
-  z-index: 2;                      /* above the white card to overlap seam */
-  --lift: clamp(56px, 9vh, 96px);  /* how far the panel overlaps into the hero */
+  z-index: 2;                     
+  --lift: clamp(56px, 9vh, 96px);  
 }
 
 .panel {
@@ -120,9 +118,8 @@ p.kicker {
   background: #2e4f80;
   border-radius: 0;
   color: $color-text;
-  overflow: visible;               /* allow connectors to stick out over the seam */
+  overflow: visible;               
 
-  /* The magic: lift up, but extend height so the bottom still meets the row */
   transform: translateY(calc(-1 * var(--lift)));
   height: 79.5%;
 
@@ -146,7 +143,7 @@ p.kicker {
 .blurb { margin: 0; opacity: .9; color: $white; line-height: 1.75rem; font-size: 1.125rem; }
 
 /* one stat row */
-$connector-w: 120px;               /* length of your bullets.svg */
+$connector-w: 120px;              
 $connector-h: 50px;
 
 .stat {

@@ -94,7 +94,6 @@ export default function Hero() {
             controls={false}
             controlsList="nodownload noplaybackrate noremoteplayback"
           >
-            <source src="/assets/labqs-landing-vid1.webm" type="video/webm" />
             <source src="/assets/labqs-landing-vid1.mp4"  type="video/mp4" />
           </video>
 
