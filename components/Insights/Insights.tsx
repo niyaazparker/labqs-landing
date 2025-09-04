@@ -1,13 +1,5 @@
-// no 'use client' here — this is a SERVER component
+// SERVER component – no 'use client'
 import ClientInsights, { Card } from './InsightsClient';
-import { headers } from 'next/headers';
-
-function getBaseUrl() {
-  const h = headers();
-  const proto = h.get('x-forwarded-proto') ?? 'http';
-  const host  = h.get('x-forwarded-host') ?? h.get('host');
-  return `${proto}://${host}`;
-}
 
 const FALLBACK: Card[] = [
   {
@@ -19,6 +11,20 @@ const FALLBACK: Card[] = [
     href: '/media/portable-alpha-debut',
   },
 ];
+
+/** Robust base URL builder for server-side fetches */
+function getBaseUrl() {
+  // Prefer explicit override if you add one
+  const explicit = process.env.NEXT_PUBLIC_BASE_URL;
+  if (explicit) return explicit; // e.g. 'https://labqs.com' or 'http://localhost:3000'
+
+  // On Vercel, VERCEL_URL is like 'my-app-abc.vercel.app' (no protocol)
+  const vercel = process.env.VERCEL_URL;
+  if (vercel) return `https://${vercel}`;
+
+  // Local dev default
+  return 'http://localhost:3000';
+}
 
 async function getInsights(): Promise<Card[]> {
   try {

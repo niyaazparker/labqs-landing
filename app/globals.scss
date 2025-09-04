@@ -1,10 +1,10 @@
 /* app/globals.scss */
 @use '../styles/variables' as *;
 
-/* No variable assignments here – let next/font set them */
 :root {}
-
-/* Use the variables with good fallbacks */
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   color: $color-text;
